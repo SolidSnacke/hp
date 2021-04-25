@@ -19,6 +19,9 @@ def help(update, context):
 # просто пасхалочка не обращайте внимение.
 def easter_egg(update, context):
     global faul
+    global count
+    faul = 0
+    count = 0
     f = random.randint(0, 1)
     if f == 1:
         video = open('data/BRUH.mp4', 'rb')
@@ -26,20 +29,23 @@ def easter_egg(update, context):
         video = open('data/Monkey.mp4', 'rb')
     update.message.reply_text("О вот и пасхалочка.")
     context.bot.send_video(update.message.chat.id, video)
-    faul = 0
     return ConversationHandler.END
 
 
 def get_stop(update, context):
     global faul
-    update.message.reply_text("Жаль. Тогда прощайте увидимся позже(возможно)")
+    global count
     faul = 0
+    count = 0
+    update.message.reply_text("Жаль. Тогда прощайте увидимся позже(возможно)")
     return ConversationHandler.END
 
 
 def start(update, context):
     global faul
+    global count
     faul = 0
+    count = 0
     update.message.reply_text("""Приветствую!
 Вы попали на небольшой опрос-тест.
 Буду рад если вы пройлете его до конца.
@@ -259,7 +265,6 @@ def film_c_ten(update, context):
 def end(update, context):
     global faul
     global count
-    global count_f
     eleven = update.message.text
     if eleven == "3" or eleven == 'Олень':
         count += 1
@@ -283,6 +288,7 @@ def end(update, context):
                                   '+ 1 печенька в вашем кармане.')
     update.message.reply_text('Спасибо за участие в опросе! Всего доброго!')
     faul = 0
+    count = 0
     return ConversationHandler.END
 
 
